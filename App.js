@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Alert, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, SafeAreaView, Image } from 'react-native';
 
 export default function App() {
   return (
@@ -13,7 +13,18 @@ export default function App() {
 
       </View>
       <View style={styles.wardrobeView}>
-
+        <Image 
+          source={require('./assets/tshirt.png')}
+          style={styles.tshirt} 
+        />
+        <Image 
+          source={require('./assets/pants.png')}
+          style={styles.pants} 
+        />
+        <Image 
+          source={require('./assets/shoes.png')}
+          style={styles.shoes} 
+        />
 
       </View>
       <View style={styles.buttonView}>
@@ -50,7 +61,9 @@ const styles = StyleSheet.create({
   },
   wardrobeView: {
     flex: 14,
-    backgroundColor: 'black',
+    backgroundColor: 'yellow',
+    justifyContent:'center',
+    alignItems:'center'
 
   },
   buttonView: {
@@ -67,5 +80,17 @@ const styles = StyleSheet.create({
   clothesButton: {
     flex:1,
 
+  },
+  tshirt: {
+    height:200,
+    width:200
+  },
+  shoes: {
+    height:100,
+    width:100
+  },
+  pants: {
+    height:200,
+    width:200
   }
 });
