@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Alert, SafeAreaView, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, SafeAreaView, Image, TextComponent } from 'react-native';
 
 export default function App() {
   return (
@@ -25,11 +25,17 @@ export default function App() {
           source={require('./assets/shoes.png')}
           style={styles.shoes} 
         />
-
+      </View>
+      <View style={styles.weatherSection}>
+        <Text style={styles.weatherText}> 22 degrees Celcius</Text>
+        <Image
+        source={require('./assets/sunnyicon.jpeg')}
+        style={styles.sunnyIcon}
+        />
       </View>
       <View style={styles.buttonView}>
         <Button
-          title="Weather"
+          title="More Weather"
           style={styles.weatherButton}
           onPress={() => Alert.alert('Simple Button pressed')}
         />
@@ -61,7 +67,7 @@ const styles = StyleSheet.create({
   },
   wardrobeView: {
     flex: 14,
-    backgroundColor: 'yellow',
+    backgroundColor: 'white',
     justifyContent:'center',
     alignItems:'center'
 
@@ -75,6 +81,16 @@ const styles = StyleSheet.create({
   },
   weatherButton: {
     flex:1,
+
+  },
+  weatherSection: {
+    flex: 2,
+    flexDirection:"row",
+    justifyContent:'space-around'
+
+  },
+  weatherText: {
+    fontSize:30
 
   },
   clothesButton: {
@@ -92,5 +108,9 @@ const styles = StyleSheet.create({
   pants: {
     height:200,
     width:200
+  },
+  sunnyIcon: {
+    height:100,
+    width:100
   }
 });
