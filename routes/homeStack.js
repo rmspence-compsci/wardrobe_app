@@ -1,7 +1,8 @@
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from 'react-navigation';
-import AddClothes from '../screens/addClothes'
+import AddClothes from '../screens/addClothes';
 import Recommended from "../screens/recommended";
+import Weather from '../screens/weather.js';
 
 const screens = {
     Home: {
@@ -12,8 +13,11 @@ const screens = {
     },
     AddClothes: {
         screen: AddClothes
-    }
-
+    },
+    Weather: {
+        screen: Weather
+    },
+// ADD TASK TO TRELLO PAGE
 }
 
 const homeStack = createStackNavigator(screens, {
