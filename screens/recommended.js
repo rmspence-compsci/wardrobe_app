@@ -7,6 +7,10 @@ const Recommended = ({ navigation }) => {
     navigation.navigate('AddClothes')
   }
 
+  const onPastOutfitsPressHandler = () => {
+    navigation.navigate('PastOutfits')
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wardrobeView}>
@@ -40,6 +44,11 @@ const Recommended = ({ navigation }) => {
           title="Add Clothes"
           style={styles.clothesButton}
           onPress={onAddClothesPressHandler}
+        />
+        <Button
+          title="Past Outfits"
+          style={styles.pastOutfitsButton}
+          onPress={onPastOutfitsPressHandler}
         />
       </View>
     </SafeAreaView>
@@ -78,7 +87,6 @@ const styles = StyleSheet.create({
   },
   weatherButton: {
     flex:1,
-
   },
   weatherSection: {
     flex: 2,
@@ -109,7 +117,10 @@ const styles = StyleSheet.create({
   sunnyIcon: {
     height:100,
     width:100
-  }
+  },
+  pastOutfitsButton: {
+    flex: 1,
+  },
 }
 );
 

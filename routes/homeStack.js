@@ -2,6 +2,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from 'react-navigation';
 import AddClothes from '../screens/addClothes'
 import Recommended from "../screens/recommended";
+import PastOutfits from "../screens/pastOutfits";
 
 const screens = {
     Home: {
@@ -12,6 +13,9 @@ const screens = {
     },
     AddClothes: {
         screen: AddClothes
+    },
+    PastOutfits: {
+        screen: PastOutfits
     }
 
 }
