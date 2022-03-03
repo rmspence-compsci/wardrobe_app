@@ -5,7 +5,10 @@ const Recommended = ({ navigation }) => {
 
   const onAddClothesPressHandler = () => {
     navigation.navigate('AddClothes')
-  }
+  };
+  const onWeatherPressHandler = () => {
+    navigation.navigate('Weather')
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -34,7 +37,7 @@ const Recommended = ({ navigation }) => {
         <Button
           title="More Weather"
           style={styles.weatherButton}
-          onPress={() => Alert.alert('Simple Button pressed')}
+          onPress={onWeatherPressHandler}
         />
         <Button
           title="Add Clothes"
@@ -44,7 +47,7 @@ const Recommended = ({ navigation }) => {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -60,14 +63,12 @@ const styles = StyleSheet.create({
   title: {
     color:"white",
     fontSize:30, 
-
   },
   wardrobeView: {
     flex: 14,
     backgroundColor: 'white',
     justifyContent:'center',
     alignItems:'center'
-
   },
   buttonView: {
     flex: 1,
@@ -78,21 +79,17 @@ const styles = StyleSheet.create({
   },
   weatherButton: {
     flex:1,
-
   },
   weatherSection: {
     flex: 2,
     flexDirection:"row",
     justifyContent:'space-around'
-
   },
   weatherText: {
     fontSize:30
-
   },
   clothesButton: {
     flex:1,
-
   },
   tshirt: {
     height:200,
