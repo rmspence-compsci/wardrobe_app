@@ -14,6 +14,7 @@ const screens = {
     AddClothes: {
         screen: AddClothes
     },
+    
     PastOutfits: {
         screen: PastOutfits
     }

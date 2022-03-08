@@ -46,7 +46,7 @@ const Recommended = ({ navigation }) => {
           onPress={onAddClothesPressHandler}
         />
         <Button
-          title="Past Outfits"
+          title="Past Outfit"
           style={styles.pastOutfitsButton}
           onPress={onPastOutfitsPressHandler}
         />

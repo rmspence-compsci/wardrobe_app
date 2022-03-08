@@ -1,27 +1,56 @@
-import { StyleSheet, View, Text, TextInput, Keyboard, KeyboardAvoidingView, SafeAreaView,Image} from 'react-native'
+import { StyleSheet, View, Text, TextInput, Keyboard, KeyboardAvoidingView, SafeAreaView,Image, Pressable} from 'react-native'
+import React, {useState, useEffect} from 'react'; // Hook for functional components
+import Attribute from '../Component/Attribute';
 
 /* TO-DO
-Function to edit name, default name is the date when clicked
-Function to edit attributes 
-Add Attribute scoring design
-How to find image of outfit worn on that day?
+Function to edit name, default name is the date when clicked {Done but title does not save}
+Function to edit attributes scoring {Not done}
+Add Attribute scoring design {Somewhat Done}
 */
 
+// Hard coded attribute variable names
+let a1 = 'Overall Score'
+let a2 = 'Warmth'
+let a3 = 'Wind'
+let a4 = 'Rain'
+
 const PastOutfits = () => {
+
+    const [titleText, setTitleText] = useState("Default Title"); // Takes in name of state, function used to set state
+
+    const [scoringText, setScoringText] = useState("- /10");
+    
+    // Not used atm
+    const updateScoring = enteredScore => {
+        setScoringText(n1);
+    };
+
+    const updateTitle = enteredValue => {
+        setTitleText(enteredValue);
+    };  
+      
     return(
         <SafeAreaView style={styles.container}>
+
+            {/* Title */}
             <View style={styles.titleView}>
-                <Text style={styles.sectionTitle}>Date 12-13-2021</Text>
+                <TextInput
+                    style={styles.titleText}
+                    value={titleText}
+                    onChangeText={updateTitle}
+                />
             </View>
+
+            {/* Image Goes here */}
             <View style={styles.outfitBox}>
                 <Text style={styles.boxText}>placeholder</Text>
             </View>
-            <Text style={styles.attributeTitle}>Attributes</Text>
 
-            <View style={styles.attributeBoxes}><Text style={styles.attributeText}>Score</Text></View>
-            <View style={styles.attributeBoxes}><Text style={styles.attributeText}>Warmth</Text></View>
-            <View style={styles.attributeBoxes}><Text style={styles.attributeText}>Wind</Text></View>
-            <View style={styles.attributeBoxes}><Text style={styles.attributeText}>Rain</Text></View>
+            {/* Attribute Values goes here */}
+            <Attribute text={a1} scoring={scoringText}/>
+            <Attribute text={a2} scoring={scoringText}/>
+            <Attribute text={a3} scoring={scoringText}/>
+            <Attribute text={a4} scoring={scoringText}/>
 
         </SafeAreaView>
 
@@ -31,21 +60,24 @@ const PastOutfits = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E9EAED',
+        opacity: 1,
+        backgroundColor: '#16579c',
     },
     titleView: {
         paddingTop: 10,
         paddingHorizontal: 20,
     },
-    sectionTitle: {
+    titleText: {
+        color: 'white',
         fontSize: 36,
         fontWeight: 'bold',
-        maxWidth: '90%',
+        maxWidth: '80%',
     },
     outfitBox: {
         marginTop: 20,
+        marginBottom:20,
         width: 335,
-        height: 365,
+        height: 335,
         backgroundColor: '#FFFFFF',
         opacity: 1, // May change image opacity
         borderRadius: 10,
@@ -58,29 +90,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         maxWidth: '80%',
     },
-    attributeTitle: {
-        paddingTop: 10,
-        paddingHorizontal: 20,
-        fontSize: 28,
-        fontWeight: 'bold',
-    },
-    attributeBoxes: {
-        width: 335,
-        height: 50,
-        backgroundColor: '#FFFFFF',
-        borderRadius: 10,
-        alignSelf: 'center', // Align boxes to center
-        marginTop: 10,
-        alignItems: 'center', //Centered vertically
-        flex:1,
-        flexDirection: 'row', // Display text in horizontal direction
-    },
-    attributeText: {
-        fontSize: 24,
-        textAlign:'left',
-        marginLeft: 10,
-    }
-
+    
 });
 
 export default PastOutfits;
