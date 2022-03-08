@@ -19,7 +19,7 @@ const PastOutfits = () => {
     const [titleText, setTitleText] = useState("Default Title"); // Takes in name of state, function used to set state
 
     const [scoringText, setScoringText] = useState("- /10");
-    
+
     // Not used atm
     const updateScoring = enteredScore => {
         setScoringText(n1);
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     },
     outfitBox: {
         marginTop: 20,
-        marginBottom:20,
+        marginBottom:40,
         width: 335,
         height: 335,
         backgroundColor: '#FFFFFF',

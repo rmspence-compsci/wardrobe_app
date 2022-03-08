@@ -16,7 +16,10 @@ const screens = {
     },
     
     PastOutfits: {
-        screen: PastOutfits
+        screen: PastOutfits,
+        navigationOptions: {
+            headerShown: false
+        }
     }
 
 }

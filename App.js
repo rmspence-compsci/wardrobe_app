@@ -4,7 +4,7 @@ import Navigator from './routes/homeStack';
 import Recommended from './screens/recommended.js';
 import PastOutfits from './screens/pastOutfits';
 
-const App = props => {
+const App = () => {
   return (
     <Navigator />
   );
