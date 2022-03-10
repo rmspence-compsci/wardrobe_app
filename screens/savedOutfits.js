@@ -1,22 +1,12 @@
 import { StyleSheet, Text, View, Button, Alert, SafeAreaView, Image, TextComponent } from 'react-native';
 
-const AddClothes = ({ navigation }) => {
-  
-  const onSavedOutfitsPressHandler = () => {
-    navigation.navigate('SavedOutfits')
-  };
-
+const SavedOutfits = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.titleView}>
         <Text style={styles.title}>
-          Add Clothes Loading ...
+          Saved Outfits Loading ...
         </Text>
-        <Button
-          title="Saved Outfits"
-          style={styles.savedOutfitsButton}
-          onPress={onSavedOutfitsPressHandler}
-        />
       </View>
     </SafeAreaView>
   );
@@ -40,4 +30,4 @@ const styles = StyleSheet.create({
 }
 );
 
-export default AddClothes;
+export default SavedOutfits;
