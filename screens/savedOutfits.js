@@ -5,7 +5,7 @@ const SavedOutfits = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.titleView}>
         <Text style={styles.title}>
-          Saved Outfits Loading ...
+          Saved Outfits Loading...
         </Text>
       </View>
     </SafeAreaView>
