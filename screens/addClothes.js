@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { View, Picker, StyleSheet, Text, SafeAreaView, Image } from "react-native";
 import { SketchPicker } from 'react-color';
 
-const AddClothes = () => {
+const AddClothes = ({ navigation }) => {
+  
+  const onSavedOutfitsPressHandler = () => {
+    navigation.navigate('SavedOutfits')
+  };
   const [selectedValue, setSelectedValue] = useState("hat");
+
   return (
     <SafeAreaView style={styles.container}>
 
@@ -11,6 +16,11 @@ const AddClothes = () => {
         <Text style={styles.addclothesText}>
           Add Clothes
         </Text>
+        <Button
+          title="Saved Outfits"
+          style={styles.savedOutfitsButton}
+          onPress={onSavedOutfitsPressHandler}
+        />
       </View>
 
       <View style={styles.clothes}>
@@ -125,6 +135,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#274463',
+  },  
+  titleView: {
+    flex: 1,
+    backgroundColor: 'dodgerblue',
+    alignItems:"center"
   },
   clothes: {
     alignItems: "center",
