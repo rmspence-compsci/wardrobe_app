@@ -4,13 +4,15 @@ import AddClothes from '../screens/addClothes.js';
 import Recommended from "../screens/recommended.js";
 import Weather from '../screens/weather.js';
 import SavedOutfits from "../screens/savedOutfits.js";
+import Calendar from "../screens/calendar.js";
 
 const screens = {
-    Home: {
+    Recommended: {
         screen: Recommended,
-        navigationOptions: {
-            title: 'Home'
-        }
+
+    },
+    Calendar: {
+        screen: Calendar
     },
     AddClothes: {
         screen: AddClothes
@@ -27,8 +29,12 @@ const screens = {
 const homeStack = createStackNavigator(screens, {
     defaultNavigationOptions: {
         headerStyle: {
-            backgroundColor: '#4e94df'
-        }
+            backgroundColor: '#16579c'
+        },
+        headerTitleStyle: {
+            color: '#16579c'
+        },
+        headerTintColor: 'white'
     }
 });
 

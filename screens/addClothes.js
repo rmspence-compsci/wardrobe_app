@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { View, Picker, StyleSheet, Text, SafeAreaView, Image } from "react-native";
-import { SketchPicker } from 'react-color';
-
+import { View, StyleSheet, Text, SafeAreaView, Image, Button } from "react-native";
+import { Picker } from '@react-native-picker/picker';
 const AddClothes = ({ navigation }) => {
   
   const onSavedOutfitsPressHandler = () => {
@@ -20,17 +19,18 @@ const AddClothes = ({ navigation }) => {
           title="Saved Outfits"
           style={styles.savedOutfitsButton}
           onPress={onSavedOutfitsPressHandler}
+          color='white'
         />
       </View>
 
       <View style={styles.clothes}>
-      <View style={{
+        <View style={{
           backgroundColor: '#FFFFFF',
           width: 200,
           height: 200,
           borderRadius: 10,
           justifyContent: 'center',
-          alignItems: "center",
+          alignItems: "center"
         }}>
         <Image 
             source={require('../assets/beanie.png')}
@@ -47,10 +47,10 @@ const AddClothes = ({ navigation }) => {
           borderRadius: 10,
           justifyContent: 'center',
           fontSize: 20,
+          overflow: "hidden"
         }}>
           <Picker
             selectedValue={selectedValue}
-            style={{ height: 50, width: 200 }}
             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
           >
             <Picker.Item label="Hat" value="hat" />
@@ -60,6 +60,7 @@ const AddClothes = ({ navigation }) => {
             <Picker.Item label="Pants" value="pants" />
             <Picker.Item label="Shoes" value="shoes" />
           </Picker>
+
         </View>
       </View>
 
@@ -134,7 +135,7 @@ const AddClothes = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#274463',
+    backgroundColor: '#16579c',
   },  
   titleView: {
     flex: 1,
@@ -160,8 +161,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   addclothesText: {
-    fontSize: 35,
-    color: 'white',
+      color: 'white',
+      fontSize: 36,
+      fontWeight: 'bold',
+      maxWidth: '80%',
   },
   boxedText:{
     //flex: 1,
