@@ -3,6 +3,10 @@ import { StyleSheet, Text, View, Button, Alert, SafeAreaView, Image, TextCompone
 
 const Recommended = ({ navigation }) => {
 
+  const onCalendarPressHandler = () => {
+    navigation.navigate('Calendar')
+  };
+
   const onAddClothesPressHandler = () => {
     navigation.navigate('AddClothes')
   };
@@ -13,24 +17,28 @@ const Recommended = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wardrobeView}>
+        <Text style={styles.title}>Today's Outfit</Text>
         <Image 
-          source={require('../assets/tshirt.png')}
+          source={require('../assets/plainshirt.png')}
           style={styles.tshirt} 
+          resizeMode='contain'
         />
         <Image 
-          source={require('../assets/pants.png')}
+          source={require('../assets/jeans.png')}
           style={styles.pants} 
+          resizeMode='contain'
         />
         <Image 
-          source={require('../assets/shoes.png')}
+          source={require('../assets/gumshoes.png')}
           style={styles.shoes} 
+          resizeMode='contain'
         />
       </View>
       <View style={styles.weatherSection}>
         <Text style={styles.weatherText}> 22 degrees Celcius</Text>
         <Image
-        source={require('../assets/sunnyicon.jpeg')}
-        style={styles.sunnyIcon}
+        source={{uri: 'http://openweathermap.org/img/wn/10d@2x.png'}}
+        style={styles.weatherIcon}
         />
       </View>
       <View style={styles.buttonView}>
@@ -38,11 +46,19 @@ const Recommended = ({ navigation }) => {
           title="More Weather"
           style={styles.weatherButton}
           onPress={onWeatherPressHandler}
+          color='white'
+        />
+        <Button
+          title="Calendar"
+          style={styles.calendarButton}
+          onPress={onCalendarPressHandler}
+          color='white'
         />
         <Button
           title="Add Clothes"
           style={styles.clothesButton}
           onPress={onAddClothesPressHandler}
+          color='white'
         />
       </View>
     </SafeAreaView>
@@ -52,27 +68,23 @@ const Recommended = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#16579c',
   },  
-  titleView: {
-    flex: 1,
-    backgroundColor: 'dodgerblue',
-    alignItems:"center"
-
-  },
-  title: {
-    color:"white",
-    fontSize:30, 
-  },
   wardrobeView: {
     flex: 14,
     backgroundColor: 'white',
     justifyContent:'center',
     alignItems:'center'
   },
+  title: {
+    color: 'black',
+    fontSize: 36,
+    fontWeight: 'bold',
+    maxWidth: '80%',
+},
   buttonView: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#16579c',
     flexDirection:"row",
     justifyContent:"space-between",
     alignItems:"flex-end"
@@ -83,27 +95,31 @@ const styles = StyleSheet.create({
   weatherSection: {
     flex: 2,
     flexDirection:"row",
-    justifyContent:'space-around'
+    justifyContent:'space-around',
+    alignItems:'center'
   },
   weatherText: {
-    fontSize:30
+    color: 'white',
+    fontSize: 30,
+    fontWeight: 'bold',
+    maxWidth: '80%',
   },
   clothesButton: {
     flex:1,
   },
+  calendarButton: {
+    flex:1
+  },
   tshirt: {
-    height:200,
-    width:200
+    flex:3
   },
   shoes: {
-    height:100,
-    width:100
+    flex:1
   },
   pants: {
-    height:200,
-    width:200
+    flex:3 
   },
-  sunnyIcon: {
+  weatherIcon: {
     height:100,
     width:100
   }

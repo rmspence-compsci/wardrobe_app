@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   container: {
   },
   header_container: {
-    backgroundColor: 'blue',
+    backgroundColor: '#16579c',
     justifyContent: "space-evenly",
     flexDirection: 'column',
     paddingVertical: 60,
@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
 
   date_container: {
     alignItems: 'center',
-    top: 45,
+    top: 30,
   },
   date: {
     color: "white",
@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18, 
     paddingVertical: 10,
     borderRadius: 15,
-    top: -30,
+    top: -80,
   },
   add_event_text: {
     color: "white",
