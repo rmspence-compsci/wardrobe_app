@@ -19,7 +19,7 @@ const AddClothes = ({ navigation }) => {
           title="Saved Outfits"
           style={styles.savedOutfitsButton}
           onPress={onSavedOutfitsPressHandler}
-          color='white'
+          color={Platform.OS == 'android' ? '#16579c' : 'white' }
         />
       </View>
 

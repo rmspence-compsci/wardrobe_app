@@ -5,7 +5,6 @@ import { StyleSheet, Text, View, ImageBackground} from 'react-native';
 import Datetime from '../components/Datetime'
 import WeatherScroll from '../components/WeatherScroll'
 
-
 const apiKey = ["50b857753c980b99f5281bf0531b0e98"]
 
 export default function App() {
