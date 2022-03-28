@@ -3,13 +3,15 @@ import { StyleSheet, Text, View, Button, Alert, SafeAreaView, Image, TextCompone
 
 const Recommended = ({ navigation }) => {
 
+// send a user to the calendar page when they click the calendar button
   const onCalendarPressHandler = () => {
     navigation.navigate('Calendar')
   };
-
+  // send a user to the add clothes page when they click the add clothes button
   const onAddClothesPressHandler = () => {
     navigation.navigate('AddClothes')
   };
+  // send a user to the weather page when they click the weather button
   const onWeatherPressHandler = () => {
     navigation.navigate('Weather')
   };
@@ -17,7 +19,9 @@ const Recommended = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wardrobeView}>
+        {/* Title */}
         <Text style={styles.title}>Today's Outfit</Text>
+        {/* Generic images */}
         <Image 
           source={require('../assets/plainshirt.png')}
           style={styles.tshirt} 
@@ -34,6 +38,7 @@ const Recommended = ({ navigation }) => {
           resizeMode='contain'
         />
       </View>
+      {/* Compenent for the weather preview */}
       <View style={styles.weatherSection}>
         <Text style={styles.weatherText}> 22 degrees Celcius</Text>
         <Image
@@ -41,6 +46,7 @@ const Recommended = ({ navigation }) => {
         style={styles.weatherIcon}
         />
       </View>
+      {/* View for all three buttons */}
       <View style={styles.buttonView}>
         <Button
           title="More Weather"
@@ -65,6 +71,7 @@ const Recommended = ({ navigation }) => {
   );
 };
 
+// styles for all the components
 const styles = StyleSheet.create({
   container: {
     flex: 1,
