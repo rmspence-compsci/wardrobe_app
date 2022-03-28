@@ -8,8 +8,6 @@ import WeatherScroll from '../components/WeatherScroll'
 
 const apiKey = ["50b857753c980b99f5281bf0531b0e98"]
 
-
-const img = require('../assets/testimage.jpeg')
 export default function App() {
   const [data, setData] = useState({});
 
