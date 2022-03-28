@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
 import { render } from 'react-dom';
 import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
+import { Platform } from 'react-native';
 
 var day_codes = ['S','M','T','W','T','F','S'];
 var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -367,7 +368,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18, 
     paddingVertical: 10,
     borderRadius: 15,
-    top: -80,
+    top: Platform.OS == "ios" ? -80 : -140,
   },
   add_event_text: {
     color: "white",

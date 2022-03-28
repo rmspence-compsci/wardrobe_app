@@ -46,19 +46,19 @@ const Recommended = ({ navigation }) => {
           title="More Weather"
           style={styles.weatherButton}
           onPress={onWeatherPressHandler}
-          color='white'
+          color={Platform.OS == 'android' ? '#16579c' : 'white' }
         />
         <Button
           title="Calendar"
           style={styles.calendarButton}
           onPress={onCalendarPressHandler}
-          color='white'
+          color={Platform.OS == 'android' ? '#16579c' : 'white' }
         />
         <Button
           title="Add Clothes"
           style={styles.clothesButton}
           onPress={onAddClothesPressHandler}
-          color='white'
+          color={Platform.OS == 'android' ? '#16579c' : 'white' }
         />
       </View>
     </SafeAreaView>

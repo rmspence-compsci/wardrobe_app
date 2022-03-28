@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Platform} from 'react-native';
 
 // Dark dark blue #274463
 // Blue #16579c
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         marginRight: 15, // Spaces out Square from text
     },
     attributeText:{
-        fontFamily: "Futura",
+        fontFamily: Platform.OS == "ios" ? "Futura" : undefined,
         fontSize: 16,
         
     },
