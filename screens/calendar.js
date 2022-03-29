@@ -18,7 +18,7 @@ var today_date = today.getDate();
 // get number of days in current month
 var today_month_days = days_in_month[ today.getMonth() ];
 
-// array for storing todays date as well as the next seven days
+// array for storing todays date as well as the next seven days dates
 var week_date = [];
 
 // fix for if week finishes in a new month 
