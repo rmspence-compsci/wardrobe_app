@@ -3,19 +3,25 @@ import { render } from 'react-dom';
 import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
 import { Platform } from 'react-native';
 
+// save names of days and months in an array as well as the number of days in each month
 var day_codes = ['S','M','T','W','T','F','S'];
 var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 var days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
+// initialises new date objects
 var date_selected = new Date();
 var today = new Date();
 
+// set dates to todays date
 var today_date = today.getDate();
+// get number of days in current month
 var today_month_days = days_in_month[ today.getMonth() ];
 
+// array for storing todays date as well as the next seven days
 var week_date = [];
 
+// fix for if week finishes in a new month 
 for(let i = 0; i < 7; i++) {
   if (today_date + i > today_month_days){
     week_date[i] = (today_date + i) - today_month_days;
@@ -43,6 +49,7 @@ let events = [{
 
 class calendar extends React.Component{
 
+  // initialise variables to show the date selcted by the user
   state = {
     selected_date: date_selected.getDate(),
     selected_day: days[ (date_selected.getDay()) ],
@@ -52,6 +59,7 @@ class calendar extends React.Component{
 
   render(){
 
+    // sets date selected by user to be a state
     const selected_date = this.state.selected_date;
     const selected_day = this.state.selected_day;
     const selected_month = this.state.selected_month;
@@ -62,7 +70,8 @@ class calendar extends React.Component{
           <View style={styles.title_container}>
             <Text style={styles.title}>My Calendar</Text>
           </View>
-
+          
+          // display day codes (e.g. M T W T F S ....)
           <View style={styles.day_code_container}>
             <View style={styles.day_container}>
               <Text style={styles.day_codes}>
@@ -100,7 +109,8 @@ class calendar extends React.Component{
               </Text>
             </View>
           </View>
-
+          
+          // display buttons for selecting date
           <View style={styles.button_container}>
             <TouchableOpacity
               onPress={() => {this.set_date(0), this.button_selected(0)}}
@@ -167,6 +177,7 @@ class calendar extends React.Component{
           </View>
 
 
+          // display selected date
           <View style={styles.date_container}>
             <Text style={styles.date}>
               {selected_day} {String(selected_date)} {selected_month}
@@ -175,59 +186,65 @@ class calendar extends React.Component{
 
         </View>
 
+        // display events
         <View style={styles.events_container}>
+      
+          // buffer for styling
+          <View style={styles.event_buffer}></View>
 
-        <View style={styles.event_buffer}></View>
+            <View style={styles.event_buffer}>
+            <View style={styles.event_container}>
+                <Text style={styles.event_title}>
+                  {events[0].title}
+                </Text>
+                <Text style={styles.event_time}>
+                  {events[0].time}
+                </Text>
+                <Text style={styles.event_date}>
+                  {events[0].date}
+                </Text>
+              </View>
+            </View>
 
-          <View style={styles.event_buffer}>
-          <View style={styles.event_container}>
-              <Text style={styles.event_title}>
-                {events[0].title}
-              </Text>
-              <Text style={styles.event_time}>
-                {events[0].time}
-              </Text>
-              <Text style={styles.event_date}>
-                {events[0].date}
-              </Text>
+            <View style={styles.event_buffer}>
+            <View style={styles.event_container}>
+                <Text style={styles.event_title}>
+                  {events[1].title}
+                </Text>
+                <Text style={styles.event_time}>
+                  {events[1].time}
+                </Text>
+                <Text style={styles.event_date}>
+                  {events[1].date}
+                </Text>
+              </View>
             </View>
           </View>
-
-          <View style={styles.event_buffer}>
-          <View style={styles.event_container}>
-              <Text style={styles.event_title}>
-                {events[1].title}
-              </Text>
-              <Text style={styles.event_time}>
-                {events[1].time}
-              </Text>
-              <Text style={styles.event_date}>
-                {events[1].date}
-              </Text>
-            </View>
+          
+          // add event button
+          <View style={styles.date_container}>
+            <TouchableOpacity style = {styles.add_event_button}>
+              <View style={styles.add_event_container}>
+                <Text style={styles.add_event_text}>Add Event</Text>
+              </View>
+            </TouchableOpacity>
           </View>
-        </View>
-
-        <View style={styles.date_container}>
-          <TouchableOpacity style = {styles.add_event_button}>
-            <View style={styles.add_event_container}>
-              <Text style={styles.add_event_text}>Add Event</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
 
       </View>
       
     );
   }
 
+  // change the selected date based on the button clicked
   set_date = (increment) => {
     this.setState({
        selected_date: today.getDate() + increment,
        selected_day: days[(today.getDay() + increment) % 7],
     })
   }
-
+  
+  
+  // change the colour of the button which has been clicked
   button_selected = (button_num) => {
 
     let new_button_state = this.state.button_state.slice(0); // makes copy of the array
@@ -245,6 +262,7 @@ class calendar extends React.Component{
   
 }
 
+// styles
 const styles = StyleSheet.create({
   container: {
   },
