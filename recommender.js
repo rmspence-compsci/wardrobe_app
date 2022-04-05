@@ -23,12 +23,27 @@ export const ClothingType = {
  */
 
 /**
- * 
- * @param {ClothingItem[]} wardrobe The available items of clothing.
- * @returns {ClothingItem} The recommended clothing item.
+ * An object which can recommend items of clothing for a specific set of conditions.
  */
-export function recommend(wardrobe) {
-  const randIndex = Math.floor(Math.random() * wardrobe.length);
-  return wardrobe[randIndex];
-}
+export class Recommender {
+  /**
+   * @param {ClothingItem[]} wardrobe The available items of clothing.
+   * @param {ClothingItem[]} [history] An optional array of previously used clothing items.
+   */
+  constructor(wardrobe, history = []) {
+    this.wardrobe = wardrobe;
+    this.history = history;
+  }
 
+  /**
+   * Recommends an item based on given conditions.
+   * @param {{}} [conditions] The current conditions to take into account when recommending an outfit.
+   */
+  recommendItem(conditions = {}) {
+    const randomIndex = Math.floor(Math.random() * this.wardrobe.length),
+      item = this.wardrobe[randomIndex];
+
+    this.history.push(item);
+    return item;
+  }
+}
