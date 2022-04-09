@@ -24,6 +24,7 @@ export default function App() {
       })
   }
 
+
   return (
     <View style={styles.container}>
 
@@ -36,6 +37,8 @@ export default function App() {
     </View>
   );
 }
+
+export {fetchapi} ;
 
 const styles = StyleSheet.create({
   container: {
