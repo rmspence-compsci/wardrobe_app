@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Alert, SafeAreaView, Image, TextComponent } from 'react-native';
+import { getOS } from '../helpers/getOS';
 
 const Recommended = ({ navigation }) => {
 
@@ -52,19 +53,19 @@ const Recommended = ({ navigation }) => {
           title="More Weather"
           style={styles.weatherButton}
           onPress={onWeatherPressHandler}
-          color={Platform.OS == 'android' ? '#16579c' : 'white' }
+          color={getOS == 'android' ? '#16579c' : 'white' }
         />
         <Button
           title="Calendar"
           style={styles.calendarButton}
           onPress={onCalendarPressHandler}
-          color={Platform.OS == 'android' ? '#16579c' : 'white' }
+          color={getOS == 'android' ? '#16579c' : 'white' }
         />
         <Button
           title="Add Clothes"
           style={styles.clothesButton}
           onPress={onAddClothesPressHandler}
-          color={Platform.OS == 'android' ? '#16579c' : 'white' }
+          color={getOS == 'android' ? '#16579c' : 'white' }
         />
       </View>
     </SafeAreaView>

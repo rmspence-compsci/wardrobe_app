@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, SafeAreaView, Image, Button } from "react-native";
 import { Picker } from '@react-native-picker/picker';
+import { getOS } from '../helpers/getOS';
 const AddClothes = ({ navigation }) => {
   
   const onSavedOutfitsPressHandler = () => {
@@ -19,7 +20,7 @@ const AddClothes = ({ navigation }) => {
           title="Saved Outfits"
           style={styles.savedOutfitsButton}
           onPress={onSavedOutfitsPressHandler}
-          color={Platform.OS == 'android' ? '#16579c' : 'white' }
+          color={getOS == 'android' ? '#16579c' : 'white' }
         />
       </View>
 
