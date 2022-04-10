@@ -1,11 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
+import getWeather from '../API/getWeather';
 
 import Datetime from '../components/Datetime'
 import WeatherScroll from '../components/WeatherScroll'
 
-const apiKey = ["50b857753c980b99f5281bf0531b0e98"]
+
 
 export default function App() {
   const [data, setData] = useState({});
@@ -16,13 +16,10 @@ export default function App() {
   
 
   const fetchapi = (latitude, longitude) => {
-    fetch( "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely,hourly" + "&appid=" + apiKey)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        setData(data)  
-      })
-  }
+        let responseData = getWeather(latitude, longitude);
+        console.log(responseData);
+        setData(responseData);  
+      }
 
   return (
     <View style={styles.container}>
@@ -38,6 +35,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  // eslint-disable-next-line react-native/no-color-literals
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -45,6 +43,7 @@ const styles = StyleSheet.create({
     
   },
 
+  // eslint-disable-next-line react-native/no-color-literals
   Hello: {
     color: 'black',
     fontSize: 36,
@@ -52,6 +51,7 @@ const styles = StyleSheet.create({
     maxWidth: '80%',
   },
   
+  // eslint-disable-next-line react-native/no-color-literals
   name: {
     color: 'black',
     fontSize: 36,
