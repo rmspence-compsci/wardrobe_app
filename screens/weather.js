@@ -15,11 +15,16 @@ export default function App() {
   }, [])
   
 
-  const fetchapi = (latitude, longitude) => {
-        let responseData = getWeather(latitude, longitude);
-        console.log(responseData);
-        setData(responseData);  
-      }
+  const fetchapi = async (latitude, longitude) => {
+    await getWeather(latitude, longitude)
+    .then(data => data)
+    .then(repsonseData => {
+      setData(repsonseData);
+      console.log("cheese")
+    })
+    .catch(err => console.log(err))
+      
+  }
 
   return (
     <View style={styles.container}>
@@ -27,8 +32,8 @@ export default function App() {
         <Text style={styles.Hello}>Good morning,</Text>
         <Text style={styles.name}>Max.</Text>
 
-        <Datetime current={data.current} timezone={data.timezone}/> 
-        <WeatherScroll weatherData={data.daily}/>
+        <Datetime current={data.current} timezone={data.timezone}/>  
+        <WeatherScroll weatherData={data.daily}/> 
 
     </View>
   );
