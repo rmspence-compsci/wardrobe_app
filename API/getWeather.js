@@ -12,7 +12,7 @@ const myApiKey='7ce157f20faf8b889330003da99309ba'
 //     })
 //     .catch(err => console.error(err));
 // }
-const getWeather = async (latitude,longitude) => {
+export async function getWeather(latitude,longitude) {
     // get Data from Storage
     try {
       const data = await fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely,hourly" + "&appid=" + myApiKey);
@@ -23,10 +23,9 @@ const getWeather = async (latitude,longitude) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
 
-export default getWeather;
 
 // async function fetchFunction() {
 //   try{

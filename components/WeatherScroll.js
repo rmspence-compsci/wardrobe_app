@@ -5,6 +5,7 @@ import moment from 'moment-timezone'
 
 import FutureWeather from './FutureWeather.js'
 
+// eslint-disable-next-line react/prop-types
 const WeatherScroll = ({weatherData}) => {
   return (
     <ScrollView horizontal={true} style={styles.ScrollView}>
@@ -33,6 +34,7 @@ const CurrWeather = ({temp, data}) => {
 
 const styles = StyleSheet.create({
 
+    // eslint-disable-next-line react-native/no-color-literals
     ScrollView: {
         flex: 0.2,
         backgroundColor: '#16579c',
@@ -51,6 +53,7 @@ const styles = StyleSheet.create({
 
     },
 
+    // eslint-disable-next-line react-native/no-color-literals
     currentTempcontainer:{
         flexDirection: 'row',
         backgroundColor: 'white',
