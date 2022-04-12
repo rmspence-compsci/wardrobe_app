@@ -5,6 +5,7 @@ import Recommended from "../screens/recommended.js";
 import Weather from '../screens/weather.js';
 import SavedOutfits from "../screens/savedOutfits.js";
 import Calendar from "../screens/calendar.js";
+import AddEvent from "../screens/addEvent.js";
 
 // This page is the navigation between current pages
 // Recommended is the bottom of the stack, and every
@@ -19,6 +20,9 @@ const screens = {
     },
     Calendar: {
         screen: Calendar
+    },
+    AddEvent: {
+        screen: AddEvent
     },
     AddClothes: {
         screen: AddClothes

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
 import { Platform } from 'react-native';
+import { StackNavigator } from "react-navigation";
+import homeStack from "../routes/homeStack.js";
+import AddEvent from "../screens/addEvent.js";
+import { getOS } from '../helpers/getOS';
 
 // save names of days and months in an array as well as the number of days in each month
 var day_codes = ['S','M','T','W','T','F','S'];
@@ -46,6 +50,9 @@ let events = [{
   }
 ]
 
+// const onAddEventPressHandler = () => {
+//   navigation.navigate('AddEvent')
+// };
 
 class calendar extends React.Component{
 
@@ -55,6 +62,10 @@ class calendar extends React.Component{
     selected_day: days[ (date_selected.getDay()) ],
     selected_month: months[ date_selected.getMonth() ],
     button_state: [styles.button_activated, styles.button, styles.button, styles.button, styles.button, styles.button, styles.button],
+  }
+
+  onAddEventPressHandler = () => {
+    navigation.navigate('AddEvent')
   }
 
   render(){
@@ -223,7 +234,7 @@ class calendar extends React.Component{
           
           {/* add event button */}
           <View style={styles.date_container}>
-            <TouchableOpacity style = {styles.add_event_button}>
+            <TouchableOpacity style = {styles.add_event_button} onPress = {this.onAddEventPressHandler}>
               <View style={styles.add_event_container}>
                 <Text style={styles.add_event_text}>Add Event</Text>
               </View>
@@ -394,4 +405,4 @@ const styles = StyleSheet.create({
 }
 );
 
-export default calendar;
+ export default calendar;
