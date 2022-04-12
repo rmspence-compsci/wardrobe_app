@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Pressable} from 'react-native';
 
 const AttributeBox = (props) => {
     return (
         <View>
-            
             <Text style={styles.attributeText}>{props.atrValue}</Text>
             <Text style={styles.itemText}>{props.title}</Text>
         </View>
@@ -17,25 +16,24 @@ const styles = StyleSheet.create({
 
     attributeText:{
         alignSelf: 'center',
-        top:10,
-        fontSize: 20,
+        top:15,
+        fontSize: 18,
         fontWeight: 'bold',
     },
     itemText: {
         
         alignSelf: 'center',
-        top: 22,
+        top: 20,
         fontSize: 16,
         fontWeight: 'bold'
     },
-
-    circular: {
-        width: 12,
-        height: 12,
-        borderColor: "#55BCF6",
-        borderWidth: 2,
-        borderRadius: 5,
+    itemLeft: {
+        flexDirection: 'row', // Display text in horizontal direction
+        alignItems: 'center',
+        flexWrap: 'wrap', // wraps to next line if text is too long
+        
     },
+    
 
 
 })
