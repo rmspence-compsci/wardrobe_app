@@ -21,7 +21,8 @@ const screens = {
         screen: Calendar
     },
     AddClothes: {
-        screen: AddClothes
+        screen: AddClothes,
+        headerShown: false
     },
     Weather: {
         screen: Weather
@@ -39,7 +40,8 @@ const homeStack = createStackNavigator(screens, {
         headerTitleStyle: {
             color: '#16579c'
         },
-        headerTintColor: 'white'
+        headerTintColor: 'white',
+        
     }
 });
 
