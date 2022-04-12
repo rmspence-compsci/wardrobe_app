@@ -1,131 +1,102 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, SafeAreaView, Image, Button } from "react-native";
+import { View, StyleSheet, Text, SafeAreaView, Image, Button, Pressable } from "react-native";
 import { Picker } from '@react-native-picker/picker';
+import { ClothingType } from "../recommender";
+import Dialog from "react-native-dialog";
+import AttributeBox from "../components/attributeBox";
+
 const AddClothes = ({ navigation }) => {
   
   const onSavedOutfitsPressHandler = () => {
     navigation.navigate('SavedOutfits')
   };
+
   const [selectedValue, setSelectedValue] = useState("hat");
 
+  const [colourValue, setColourValue] = useState("black");
+
+  let outfit = {
+    color: "",
+    name: "",
+    type: ClothingType.Hat,
+    rain: 1,
+    warmth: 1,
+    wind: 1
+  }
+
+  
   return (
     <SafeAreaView style={styles.container}>
-
-      <View style={styles.addclothesSection}>
-        <Text style={styles.addclothesText}>
-          Add Clothes
-        </Text>
-        <Button
-          title="Saved Outfits"
-          style={styles.savedOutfitsButton}
-          onPress={onSavedOutfitsPressHandler}
-          color={Platform.OS == 'android' ? '#16579c' : 'white' }
-        />
-      </View>
-
-      <View style={styles.clothes}>
-        <View style={{
-          backgroundColor: '#FFFFFF',
-          width: 200,
-          height: 200,
-          borderRadius: 10,
-          justifyContent: 'center',
-          alignItems: "center"
-        }}>
+      {/* Display Image of Clothes here  */}
+      <View style={styles.clothesImageBox}>
         <Image 
             source={require('../assets/beanie.png')}
-            style={styles.hat} 
-          />
-        </View>
+            style={styles.clothesImage} 
+        />
       </View>
+      <View style={styles.blueRectangle}> 
 
-      <View style={styles.picker}>
-        <View style={{
-          backgroundColor: '#FFFFFF',
-          width: 200,
-          height: 47,
-          borderRadius: 10,
-          justifyContent: 'center',
-          fontSize: 20,
-          overflow: "hidden"
-        }}>
-          <Picker
-            selectedValue={selectedValue}
-            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-          >
-            <Picker.Item label="Hat" value="hat" />
-            <Picker.Item label="Coat" value="coat" />
-            <Picker.Item label="Layer" value="layer" />
-            <Picker.Item label="Under Garment" value="under" />
-            <Picker.Item label="Pants" value="pants" />
-            <Picker.Item label="Shoes" value="shoes" />
-          </Picker>
+          <Text style={styles.titleText}>Add Clothes</Text>
 
-        </View>
-      </View>
+          <View style={styles.savedOutfitsButtonWrapper}>
+            <Button
+            title="Saved Outfits"
+            style={styles.savedOutfitsButton}
+            onPress={onSavedOutfitsPressHandler}
+            color={Platform.OS == 'android' ? '#16579c' : 'white' }
+            />
+          </View>
 
-      <View style={styles.colour}>
-        <View style={{
-          backgroundColor: '#FFFFFF',
-          width: 335,
-          height: 47,
-          borderRadius: 10,
-          justifyContent: 'center',
-        }}>
-        <Text style={styles.rgb}>Select a Main colour</Text>
-        </View>
-      </View>
+          <View style={styles.picker1Wrapper}>
+            <Picker
+              selectedValue={selectedValue}
+              onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+            >
+              <Picker.Item label="Hat" value={ClothingType.Hat}/>
+              <Picker.Item label="Coat" value={ClothingType.Coat}/>
+              <Picker.Item label="Layer" value={ClothingType.Layer} />
+              <Picker.Item label="Pants" value={ClothingType.Pants} />
+              <Picker.Item label="Shoes" value={ClothingType.Shoes} />
+            </Picker>
+          </View>
 
-      <View style={styles.boxedText}>
-        <View style={{
-          backgroundColor: '#FFFFFF',
-          width: 335,
-          height: 47,
-          borderRadius: 10,
-          justifyContent: 'center',
-          marginTop: 15
-        }}>
-          <Text style={styles.text}>Warmth                                          /10</Text>
-        </View>
-      </View>
+          <View style={styles.picker2Wrapper}>
+            <Picker
+                style={styles.picker}
+                colourValue={colourValue}
+                onValueChange={(itemValue, itemIndex) => setColourValue(itemValue)}
+              >
+                <Picker.Item label="black" value="black" />
+                <Picker.Item label="yellow" value="yellow" />
+                <Picker.Item label="red" value="red" />
+                <Picker.Item label="green" value="green" />
+                <Picker.Item label="blue" value="blue" />
+            </Picker>
+          </View>
+          
 
-      <View style={styles.boxedText}>
-        <View style={{
-          backgroundColor: '#FFFFFF',
-          width: 335,
-          height: 47,
-          borderRadius: 10,
-          justifyContent: 'center',
-          marginTop: 15
-        }}>
-          <Text style={styles.text}>Wind                                               /10</Text>
-        </View>
-      </View>
+          <View style={styles.AttributeBoxWrapper}>
+            <AttributeBox atrValue={outfit.warmth} title='Warmth'>
 
-      <View style={styles.boxedText}>
-        <View style={{
-          backgroundColor: '#FFFFFF',
-          width: 335,
-          height: 47,
-          borderRadius: 10,
-          justifyContent: 'center',
-          marginTop: 15
-        }}>
-          <Text style={styles.text}>Rain                                                /10</Text>
-        </View>
-      </View>
+            </AttributeBox>
+          </View>
+          
+          <View style={styles.AttributeBoxWrapper}>
+            <AttributeBox atrValue={outfit.wind}  title='Wind'>
 
-      <View style={styles.boxedText}>
-        <View style={{
-          backgroundColor: '#6F99C5',
-          width: 200,
-          height: 47,
-          borderRadius: 10,
-          justifyContent: 'center',
-          marginTop: 18
-        }}>
-          <Text style={styles.textSave}>Save</Text>
-        </View>
+            </AttributeBox>
+          </View>
+
+          <View style={styles.AttributeBoxWrapper}>
+            <AttributeBox atrValue={outfit.rain}  title='Rain'>
+
+            </AttributeBox>
+          </View>
+
+          <View style={styles.SaveBoxWrapper}>
+            <Text style={styles.saveBoxText}>Save</Text>
+          </View>
+
       </View>
 
     </SafeAreaView>
@@ -135,59 +106,104 @@ const AddClothes = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#16579c',
-  },  
-  titleView: {
-    flex: 1,
-    backgroundColor: 'dodgerblue',
-    alignItems:"center"
-  },
-  clothes: {
-    alignItems: "center",
-    paddingTop: 15,
-  },
-  hat: {
     backgroundColor: '#FFFFFF',
-    height:150,
-    width:150,
   },
-  picker: {
-    paddingTop: 15,
-    alignItems: "center",
-  },
-  addclothesSection: {
-    //flex: 1,
-    paddingTop: 20,
-    alignItems: "center",
-  },
-  addclothesText: {
-      color: 'white',
-      fontSize: 36,
-      fontWeight: 'bold',
-      maxWidth: '80%',
-  },
-  boxedText:{
-    //flex: 1,
-    alignItems: 'center'
-  },
-  colour: {
-    paddingTop: 15,
+  clothesImageBox:{
+    backgroundColor: '#FFFFFF',
+    position: 'absolute',
     alignItems: 'center',
+    top: 45,
+    left: 67,
+    width: 250,
+    height: 240,
+
   },
-  rgb: {
-    fontSize: 20,
-    paddingLeft: 10,
+  clothesImage:{
+    width:240,
+    height:240,
   },
-  text: {
-    fontSize: 20,
-    color: 'black',
-    paddingLeft: 10,
+  blueRectangle:{
+    backgroundColor: '#1E579C',
+    width: 390,
+    height: 330,
+    position: 'absolute',
+    bottom: 0,
+    
+    borderRadius: 20,
+    shadowOpacity: 1, // IOS Only
+    flexDirection: "row",
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    
   },
-  textSave: {
+  AttributeBoxWrapper:{
+    backgroundColor: '#FFFFFF',
+    width: 100,
+    height: 75,
+    borderRadius: 10,
+    top: 15,
+  },
+  titleText:{
+    color:'#FFFFFF',
+    position: "absolute",
+    top: 10,
+    right:110,
+    fontWeight: "bold",
+    fontSize: 30
+    
+  },
+  savedOutfitsButtonWrapper:{
+    position: "absolute",
+    top: 40,
+    right:135,
+  },
+  savedOutfitsButton:{
+    color:'#FFFFFF',
+    fontWeight: "bold",
+    fontSize: 30
+  },
+  picker1Wrapper:{
+    backgroundColor: '#FFFFFF',
+    width: 160,
+    height: 42,
+    borderRadius: 5,
+    justifyContent: 'center',
     fontSize: 20,
-    color: 'black',
-    textAlign: 'center',
+    overflow: "hidden",
+    position: "absolute",
+    top: 80
+  },
+  picker2Wrapper:{
+    backgroundColor: '#FFFFFF',
+    width: 160,
+    height: 42,
+    borderRadius: 5,
+    
+    justifyContent: 'center',
+    overflow: "hidden",
+    position: "absolute",
+    top: 80,
+    right: 20,
+  },
+  SaveBoxWrapper:{
+    backgroundColor: "#151515",
+    width: 208,
+    height: 47,
+    position: "absolute",
+    bottom: 40,
+    borderRadius: 15,
+    left: 90,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  saveBoxText:{
+    color:'#FFFFFF',
+    fontWeight: "bold",
+    fontSize: 22
   }
+
+  
+  
 });
 
 export default AddClothes;
