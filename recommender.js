@@ -23,6 +23,15 @@ function filterByPropertyValue(key, value) {
 }
 
 /**
+ * Selects a random element from the provided array
+ * @param {Array} array The array to pick from
+ * @returns A random element from the array
+ */
+function pickRandomElement(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+/**
  * Create a numerical sort function for a key within an object
  * @param {string} key The key to sort by
  * @param {boolean} [desc] Whether to create a descending sort function, defaults to true
@@ -58,6 +67,21 @@ export const ClothingType = {
  */
 
 /**
+ * @typedef {Object} Conditions
+ * @property {number} [temperature]
+ * @property {bool} [willRain]
+ * @property {number} [windSpeed]
+ */
+
+/**
+ * @typedef {Object} Outfit
+ * @property {ClothingItem} [head]
+ * @property {ClothingItem[]} legs
+ * @property {ClothingItem} shoes
+ * @property {ClothingItem[]} torso
+ */
+
+/**
  * An object which can recommend items of clothing for a specific set of conditions.
  */
 export class Recommender {
@@ -71,14 +95,32 @@ export class Recommender {
   }
 
   /**
-   * Recommends an item based on given conditions.
-   * @param {{}} [conditions] The current conditions to take into account when recommending an outfit.
+   * Recommend an outfit based on the given conditions.
+   * @param {Conditions} [conditions] The conditions to factor into the recommendation
+   * @returns {Outfit} The recommended outfit
    */
-  recommendItem(conditions = {}) {
-    const randomIndex = Math.floor(Math.random() * this.wardrobe.length),
-      item = this.wardrobe[randomIndex];
+  recommendOutfit(conditions = {}) {
+    const outfit = { legs: [], torso: [] };
+    let items = this.wardrobe.concat([]);
 
-    this.history.push(item);
-    return item;
+    if (conditions.windSpeed && conditions.windSpeed > 10) items = items.sort(sortByNumericalProperty("wind"));
+    if (conditions.willRain) items = items.sort(sortByNumericalProperty("rain"));
+
+    if (conditions.temperature) {
+      if (conditions.temperature < 12) outfit.head = pickRandomElement(items.filter(filterByPropertyValue("type", ClothingType.Hat)));
+
+      if (conditions.temperature < 18) outfit.torso.push(pickRandomElement(items.filter(filterByPropertyValue("type", ClothingType.Coat))));
+
+      let tempScore = Math.min(Math.max(temperature - 16, -5), 5) + 5;
+      items = items.filter(filterByNumericalProperty("warmth", tempScore - 1, tempScore + 1));
+    }
+
+    outfit.shoes = pickRandomElement(this.wardrobe.filter(filterByPropertyValue("type", ClothingType.Shoes)));
+    outfit.legs.push(pickRandomElement(items.filter(filterByPropertyValue("type", ClothingType.UnderGarment))));
+
+    outfit.legs.push(pickRandomElement(items.filter(filterByPropertyValue("type", ClothingType.Pants))));
+    outfit.torso.push(pickRandomElement(items.filter(filterByPropertyValue("type", ClothingType.Layer))));
+
+    return outfit;
   }
 }
