@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
 import { Platform } from 'react-native';
-import { StackNavigator } from "react-navigation";
-import homeStack from "../routes/homeStack.js";
-import AddEvent from "../screens/addEvent.js";
-import { getOS } from '../helpers/getOS';
 
 // save names of days and months in an array as well as the number of days in each month
 var day_codes = ['S','M','T','W','T','F','S'];
@@ -50,9 +46,6 @@ let events = [{
   }
 ]
 
-// const onAddEventPressHandler = () => {
-//   navigation.navigate('AddEvent')
-// };
 
 class calendar extends React.Component{
 
@@ -62,10 +55,6 @@ class calendar extends React.Component{
     selected_day: days[ (date_selected.getDay()) ],
     selected_month: months[ date_selected.getMonth() ],
     button_state: [styles.button_activated, styles.button, styles.button, styles.button, styles.button, styles.button, styles.button],
-  }
-
-  onAddEventPressHandler = () => {
-    navigation.navigate('AddEvent')
   }
 
   render(){
@@ -82,7 +71,7 @@ class calendar extends React.Component{
             <Text style={styles.title}>My Calendar</Text>
           </View>
           
-           {/* display day codes (e.g. M T W T F S ....) */}
+          // display day codes (e.g. M T W T F S ....)
           <View style={styles.day_code_container}>
             <View style={styles.day_container}>
               <Text style={styles.day_codes}>
@@ -121,7 +110,7 @@ class calendar extends React.Component{
             </View>
           </View>
           
-           {/* display buttons for selecting date */}
+          // display buttons for selecting date
           <View style={styles.button_container}>
             <TouchableOpacity
               onPress={() => {this.set_date(0), this.button_selected(0)}}
@@ -188,7 +177,7 @@ class calendar extends React.Component{
           </View>
 
 
-           {/* display selected date */}
+          // display selected date
           <View style={styles.date_container}>
             <Text style={styles.date}>
               {selected_day} {String(selected_date)} {selected_month}
@@ -197,10 +186,10 @@ class calendar extends React.Component{
 
         </View>
 
-         {/* display events */}
+        // display events
         <View style={styles.events_container}>
       
-           {/* buffer for styling */}
+          // buffer for styling
           <View style={styles.event_buffer}></View>
 
             <View style={styles.event_buffer}>
@@ -232,14 +221,15 @@ class calendar extends React.Component{
             </View>
           </View>
           
-          {/* add event button */}
+          // add event button
           <View style={styles.date_container}>
-            <TouchableOpacity style = {styles.add_event_button} onPress = {this.onAddEventPressHandler}>
+            <TouchableOpacity style = {styles.add_event_button}>
               <View style={styles.add_event_container}>
                 <Text style={styles.add_event_text}>Add Event</Text>
               </View>
             </TouchableOpacity>
           </View>
+
       </View>
       
     );
@@ -405,4 +395,4 @@ const styles = StyleSheet.create({
 }
 );
 
- export default calendar;
+export default calendar;

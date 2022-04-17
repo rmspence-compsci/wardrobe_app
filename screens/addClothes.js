@@ -3,16 +3,24 @@ import { View, StyleSheet, Text, SafeAreaView, Image, Button, Pressable, TextInp
 import { Picker } from '@react-native-picker/picker';
 import { ClothingType } from "../recommender";
 import Dialog from "react-native-dialog";
-import AttributeBox from "../components/AttributeBox";
+import AttributeBox from "../components/attributeBox";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const nameArray = [];   // Store list of Names of outfit pieces into array
+
+const imageHat = require('../assets/beanie.png');
+const imageCoat = require('../assets/coat.png');
+const imageLayer = require('../assets/layer.png');
+const imagePants = require('../assets/pants.png');
+const imageShoes = require('../assets/shoes.png');
 
 const AddClothes = ({ navigation }) => {
- 
-  
+
   const onSavedOutfitsPressHandler = () => {
     navigation.navigate('SavedOutfits')
   };
 
-
+  const [currentImage, setNewImage] = useState(imageCoat);
   const [colourValue, setColourValue] = useState("black");
   const [titleText, setTitleText] = useState("Outfit Name");
   const [clothType, setClothType] = useState(ClothingType.Hat);
@@ -37,12 +45,33 @@ const AddClothes = ({ navigation }) => {
       wind: wind,
       rain: rain
     }
-    const outfitData = JSON.stringify(newOutfit);
-    console.log(outfitData)
-    // localStorage.setItem(titleText,outfitData)
+    storeData(newOutfit);
   }
 
-  
+  const storeData = async (value) => {
+    try {
+      nameArray.push(value.name)
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('@' + value.name, jsonValue)
+      //console.log(value)
+      console.log("Current Array: " + nameArray)
+
+    } catch (e) {
+      // saving error
+    }
+  }
+
+  const loadingHandler = async () => {
+    try{
+      for (let i = 0; i < nameArray.length; i++){
+        const jsonValue = await AsyncStorage.getItem('@'+ nameArray[i])
+        console.log(jsonValue)
+      }
+    } catch (e){
+      console.log("Error when loading outfits.")
+    } 
+  }
+
   let warmthValue = '0'
   warmthValue = warmth + "";
 
@@ -51,9 +80,7 @@ const AddClothes = ({ navigation }) => {
 
   let rainValue ='0';
   rainValue = rain + "";
-  // if (warmth >= 0 && warmth <= 10){
-    
-  // }
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -61,7 +88,7 @@ const AddClothes = ({ navigation }) => {
       {/* Display Image of Clothes here  */}
       <View style={styles.clothesImageBox}>
         <Image 
-            source={require('../assets/beanie.png')}
+            source={currentImage} // Disabled beanie due to screen burn in
             style={styles.clothesImage} 
         />
       </View>
@@ -74,7 +101,9 @@ const AddClothes = ({ navigation }) => {
             onChangeText={setTitleText}
         />
       </View>
-      
+      {/* <Button  style={styles.saveBoxText} title="Load"  onPress={loadingHandler}
+             color={Platform.OS == 'android' ? '#16579c' : 'white' }
+            /> */}
       <View style={styles.blueRectangle}> 
 
           <Text style={styles.titleText}>Add Clothes</Text>
@@ -92,6 +121,7 @@ const AddClothes = ({ navigation }) => {
             <Picker
               selectedValue={clothType}
               onValueChange={setClothType}
+              // Tried adding onPress={imagehandler} 
             >
               <Picker.Item label="Hat" value={ClothingType.Hat}/>
               <Picker.Item label="Coat" value={ClothingType.Coat}/>
@@ -103,7 +133,7 @@ const AddClothes = ({ navigation }) => {
 
           <View style={styles.picker2Wrapper}>
             <Picker
-                colourValue={colourValue}
+                selectedValue={colourValue}
                 onValueChange={setColourValue}
               >
                 <Picker.Item label="black" value="black" />
@@ -163,6 +193,8 @@ const AddClothes = ({ navigation }) => {
         <Text style={styles.circularText}>+</Text>
       </Pressable>
 
+
+      
     </SafeAreaView>
   );
 }
