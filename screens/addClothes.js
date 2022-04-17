@@ -8,21 +8,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const nameArray = [];   // Store list of Names of outfit pieces into array
 
-const imageHat = require('../assets/beanie.png');
-const imageCoat = require('../assets/coat.png');
-const imageLayer = require('../assets/layer.png');
-const imagePants = require('../assets/pants.png');
-const imageShoes = require('../assets/shoes.png');
-
+const typeImages = {
+  [ClothingType.Hat]:  require('../assets/beanie.png'),
+  [ClothingType.Coat]: require('../assets/coat.png'),
+  [ClothingType.Layer]: require('../assets/layer.png'),
+  [ClothingType.Pants]: require('../assets/pants.png'),
+  [ClothingType.Shoes]: require('../assets/shoes.png')
+}
 const AddClothes = ({ navigation }) => {
 
   const onSavedOutfitsPressHandler = () => {
     navigation.navigate('SavedOutfits')
   };
 
-  const [currentImage, setNewImage] = useState(imageCoat);
   const [colourValue, setColourValue] = useState("black");
-  const [titleText, setTitleText] = useState("Outfit Name");
+  const [titleText, setTitleText] = useState("Name your piece!");
   const [clothType, setClothType] = useState(ClothingType.Hat);
   const [warmth, setWarmthValue] = useState(1);
   const [wind, setWindValue] = useState(1);
@@ -61,6 +61,7 @@ const AddClothes = ({ navigation }) => {
     }
   }
 
+  // Fuction to read clothing pieces saved
   const loadingHandler = async () => {
     try{
       for (let i = 0; i < nameArray.length; i++){
@@ -88,8 +89,16 @@ const AddClothes = ({ navigation }) => {
       {/* Display Image of Clothes here  */}
       <View style={styles.clothesImageBox}>
         <Image 
-            source={currentImage} // Disabled beanie due to screen burn in
-            style={styles.clothesImage} 
+            style={{
+              width:240,
+              height:240,
+              resizeMode: 'contain',
+              tintColor: colourValue,
+            } 
+            }
+            
+            source={typeImages[clothType]} // Disabled beanie due to screen burn in
+            
         />
       </View>
 
@@ -101,7 +110,7 @@ const AddClothes = ({ navigation }) => {
             onChangeText={setTitleText}
         />
       </View>
-      {/* <Button  style={styles.saveBoxText} title="Load"  onPress={loadingHandler}
+      {/* <Button  style={styles.saveBo    xText} title="Load"  onPress={loadingHandler}
              color={Platform.OS == 'android' ? '#16579c' : 'white' }
             /> */}
       <View style={styles.blueRectangle}> 
@@ -121,7 +130,6 @@ const AddClothes = ({ navigation }) => {
             <Picker
               selectedValue={clothType}
               onValueChange={setClothType}
-              // Tried adding onPress={imagehandler} 
             >
               <Picker.Item label="Hat" value={ClothingType.Hat}/>
               <Picker.Item label="Coat" value={ClothingType.Coat}/>
@@ -218,7 +226,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     position: 'absolute',
     alignItems: 'center',
-    top: 45,
+    top: 90,
     left: 67,
     width: 250,
     height: 240,
@@ -227,6 +235,7 @@ const styles = StyleSheet.create({
   clothesImage:{
     width:240,
     height:240,
+    
   },
   blueRectangle:{
     backgroundColor: '#1E579C',
