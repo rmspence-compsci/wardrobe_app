@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-unused-styles */
+/* eslint-disable react-native/no-color-literals */
 import React, {useEffect, useState} from 'react'
 import {View, Text, StyleSheet} from 'react-native';
 import moment from 'moment-timezone'
@@ -5,13 +7,14 @@ import moment from 'moment-timezone'
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-const apiKey = ["50b857753c980b99f5281bf0531b0e98"]
+// const apiKey = ["50b857753c980b99f5281bf0531b0e98"]
 
 
 
 
 
 
+// eslint-disable-next-line react/prop-types
 const WeatherItem = ({title, value, unit}) => {
     return(
         <View style={styles.weatherItem}>
@@ -20,6 +23,7 @@ const WeatherItem = ({title, value, unit}) => {
         </View>
     )
 }
+// eslint-disable-next-line react/prop-types
 const Datetime = ({current, timezone}) => {
 
     const [date, setDate] = useState('')

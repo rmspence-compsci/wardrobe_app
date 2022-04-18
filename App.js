@@ -24,6 +24,7 @@ const analytics = getAnalytics(app);
 */
 const App = () => {
   return (
+    // eslint-disable-next-line react/react-in-jsx-scope
     <Navigator />
   );
 }
