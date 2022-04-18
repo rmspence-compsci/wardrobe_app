@@ -103,15 +103,15 @@ export class Recommender {
     const outfit = { legs: [], torso: [] };
     let items = this.wardrobe.concat([]);
 
-    if (conditions.windSpeed && conditions.windSpeed > 10) items = items.sort(sortByNumericalProperty("wind"));
+    if (conditions.windSpeed != undefined && conditions.windSpeed > 10) items = items.sort(sortByNumericalProperty("wind"));
     if (conditions.willRain) items = items.sort(sortByNumericalProperty("rain"));
 
-    if (conditions.temperature) {
+    if (conditions.temperature != undefined) {
       if (conditions.temperature < 12) outfit.head = pickRandomElement(items.filter(filterByPropertyValue("type", ClothingType.Hat)));
 
       if (conditions.temperature < 18) outfit.torso.push(pickRandomElement(items.filter(filterByPropertyValue("type", ClothingType.Coat))));
 
-      let tempScore = Math.min(Math.max(temperature - 16, -5), 5) + 5;
+      let tempScore = Math.min(Math.max(conditions.temperature - 16, -5), 5) + 5;
       items = items.filter(filterByNumericalProperty("warmth", tempScore - 1, tempScore + 1));
     }
 
