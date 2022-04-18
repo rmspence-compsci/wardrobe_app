@@ -47,7 +47,7 @@ let events = [{
 ]
 
 
-class calendar extends React.Component{
+class Calendar extends React.Component{
 
   // initialise variables to show the date selcted by the user
   state = {
@@ -71,7 +71,7 @@ class calendar extends React.Component{
             <Text style={styles.title}>My Calendar</Text>
           </View>
           
-          // display day codes (e.g. M T W T F S ....)
+          {/* display day codes (e.g. M T W T F S ....) */}
           <View style={styles.day_code_container}>
             <View style={styles.day_container}>
               <Text style={styles.day_codes}>
@@ -110,7 +110,7 @@ class calendar extends React.Component{
             </View>
           </View>
           
-          // display buttons for selecting date
+          {/* display buttons for selecting date */}
           <View style={styles.button_container}>
             <TouchableOpacity
               onPress={() => {this.set_date(0), this.button_selected(0)}}
@@ -177,7 +177,7 @@ class calendar extends React.Component{
           </View>
 
 
-          // display selected date
+          {/* display selected date */}
           <View style={styles.date_container}>
             <Text style={styles.date}>
               {selected_day} {String(selected_date)} {selected_month}
@@ -186,10 +186,10 @@ class calendar extends React.Component{
 
         </View>
 
-        // display events
+        {/* display events */}
         <View style={styles.events_container}>
       
-          // buffer for styling
+          {/* buffer for styling */}
           <View style={styles.event_buffer}></View>
 
             <View style={styles.event_buffer}>
@@ -221,7 +221,7 @@ class calendar extends React.Component{
             </View>
           </View>
           
-          // add event button
+          {/* add event button */}
           <View style={styles.date_container}>
             <TouchableOpacity style = {styles.add_event_button}>
               <View style={styles.add_event_container}>
@@ -395,4 +395,4 @@ const styles = StyleSheet.create({
 }
 );
 
-export default calendar;
+export default Calendar;

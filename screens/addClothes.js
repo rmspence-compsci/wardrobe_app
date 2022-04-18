@@ -22,7 +22,7 @@ const AddClothes = ({ navigation }) => {
   };
 
   const [colourValue, setColourValue] = useState("black");
-  const [titleText, setTitleText] = useState("Name your piece!");
+  const [titleText, setTitleText] = useState("");
   const [clothType, setClothType] = useState(ClothingType.Hat);
   const [warmth, setWarmthValue] = useState(1);
   const [wind, setWindValue] = useState(1);
@@ -82,7 +82,7 @@ const AddClothes = ({ navigation }) => {
               width:240,
               height:240,
               resizeMode: 'contain',
-              tintColor: colourValue,
+            tintColor: colourValue,
             } 
             }
             
@@ -97,6 +97,7 @@ const AddClothes = ({ navigation }) => {
             style={styles.outfitTitle}
             value={titleText}
             onChangeText={setTitleText}
+            placeholder="Name your piece!"
         />
       </View>
       {/* <Button  style={styles.saveBo    xText} title="Load"  onPress={loadingHandler}
@@ -233,7 +234,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     
-    borderRadius: 20,
+    borderTopEndRadius: 20,
+    borderTopStartRadius: 20,
     shadowOpacity: 1, // IOS Only
     flexDirection: "row",
     justifyContent: 'space-evenly',

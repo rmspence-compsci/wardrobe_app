@@ -1,26 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Alert, SafeAreaView, Image, TextComponent } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Recommender } from "../recommender";
 
 const Recommended = ({ navigation }) => {
 
 // send a user to the calendar page when they click the calendar button
-  const onCalendarPressHandler = () => {
-    navigation.navigate('Calendar')
-  };
   // send a user to the add clothes page when they click the add clothes button
-  const onAddClothesPressHandler = () => {
-    navigation.navigate('AddClothes')
-  };
-  // send a user to the weather page when they click the weather button
-  const onWeatherPressHandler = () => {
-    navigation.navigate('Weather')
-  };
+  navigation.setOptions({
+    headerRight() {
+      return <Button title="Add" color="white" onPress={() => navigation.navigate("AddClothes")} />
+    },
+
+    title: "Today's Outfit",
+  });
+
+  let recommendation;
+
+  AsyncStorage.getAllKeys()
+    .then((keys) => {
+      return Promise.all(keys.map((key) => AsyncStorage.getItem(key)));
+    })
+    .then((clothes) => {
+      const recommender = new Recommender(clothes.map((clothesJSON) => JSON.parse(clothesJSON)));
+      
+      console.log(recommender.wardrobe);
+      recommendation = recommender.recommendOutfit({ temperature: -3, willRain: true });
+      console.log(recommendation);
+    });
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wardrobeView}>
         {/* Title */}
-        <Text style={styles.title}>Today's Outfit</Text>
+        {/* <Text style={styles.title}>Today's Outfit</Text> */}
         {/* Generic images */}
         <Image 
           source={require('../assets/plainshirt.png')}
@@ -44,27 +57,6 @@ const Recommended = ({ navigation }) => {
         <Image
         source={{uri: 'http://openweathermap.org/img/wn/10d@2x.png'}}
         style={styles.weatherIcon}
-        />
-      </View>
-      {/* View for all three buttons */}
-      <View style={styles.buttonView}>
-        <Button
-          title="More Weather"
-          style={styles.weatherButton}
-          onPress={onWeatherPressHandler}
-          color={Platform.OS == 'android' ? '#16579c' : 'white' }
-        />
-        <Button
-          title="Calendar"
-          style={styles.calendarButton}
-          onPress={onCalendarPressHandler}
-          color={Platform.OS == 'android' ? '#16579c' : 'white' }
-        />
-        <Button
-          title="Add Clothes"
-          style={styles.clothesButton}
-          onPress={onAddClothesPressHandler}
-          color={Platform.OS == 'android' ? '#16579c' : 'white' }
         />
       </View>
     </SafeAreaView>

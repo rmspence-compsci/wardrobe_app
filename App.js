@@ -1,4 +1,13 @@
-import Navigator from './routes/homeStack';
+import { Ionicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+
+// import Navigator from './routes/homeStack';
+import Calendar from "./screens/calendar";
+import Outfit from "./screens/outfit/outfit";
+import Weather from "./screens/weather";
+
+const Tabs = createBottomTabNavigator();
 
 // Import the functions you need from the SDKs you need
 //import { initializeApp } from "firebase/app";
@@ -22,10 +31,32 @@ import Navigator from './routes/homeStack';
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 */
+
+const tabIcons = {
+  Calendar: "calendar-outline",
+  Outfit: "shirt-outline",
+  Weather: "partly-sunny-outline",
+};
+
 const App = () => {
   return (
     // eslint-disable-next-line react/react-in-jsx-scope
-    <Navigator />
+    <NavigationContainer>
+      <Tabs.Navigator screenOptions={({ route }) => {
+        return {
+          headerShown: false,
+          tabBarActiveTintColor: "white",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarIcon: ({ color, size }) => < Ionicons color={color} name={tabIcons[route.name]} size={size} />,
+          tabBarLabel: route.name,
+          tabBarStyle: { backgroundColor: "#16579C", borderTopWidth: 0 },
+        };
+      }}>
+        <Tabs.Screen name="Outfit" component={Outfit} />
+        <Tabs.Screen name="Calendar" component={Calendar} />
+        <Tabs.Screen name="Weather"  component={Weather} />
+      </Tabs.Navigator>
+    </NavigationContainer>
   );
 }
 
