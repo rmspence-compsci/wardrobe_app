@@ -6,9 +6,9 @@ import Dialog from "react-native-dialog";
 import AttributeBox from "../components/attributeBox";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const nameArray = [];   // Store list of Names of outfit pieces into array
+export const nameArray = [];   // Store list of Names of outfit pieces into array
 
-const typeImages = {
+export const typeImages = {
   [ClothingType.Hat]:  require('../assets/beanie.png'),
   [ClothingType.Coat]: require('../assets/coat.png'),
   [ClothingType.Layer]: require('../assets/layer.png'),
@@ -50,7 +50,7 @@ const AddClothes = ({ navigation }) => {
 
   const storeData = async (value) => {
     try {
-      nameArray.push(value.name)
+      nameArray.push("@"+ value.name)
       const jsonValue = JSON.stringify(value)
       await AsyncStorage.setItem('@' + value.name, jsonValue)
       //console.log(value)
@@ -61,18 +61,7 @@ const AddClothes = ({ navigation }) => {
     }
   }
 
-  // Fuction to read clothing pieces saved
-  const loadingHandler = async () => {
-    try{
-      for (let i = 0; i < nameArray.length; i++){
-        const jsonValue = await AsyncStorage.getItem('@'+ nameArray[i])
-        console.log(jsonValue)
-      }
-    } catch (e){
-      console.log("Error when loading outfits.")
-    } 
-  }
-
+ 
   let warmthValue = '0'
   warmthValue = warmth + "";
 
@@ -402,4 +391,6 @@ attributeValue:{
   
 });
 
-export default AddClothes;
+export default AddClothes
+
+  
