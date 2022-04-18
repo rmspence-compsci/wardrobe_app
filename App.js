@@ -1,6 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+import { View } from "react-native";
 
 // import Navigator from './routes/homeStack';
 import Calendar from "./screens/calendar";
@@ -58,6 +60,7 @@ const App = () => {
         <Tabs.Screen name="Calendar" component={Calendar} />
         <Tabs.Screen name="Weather"  component={Weather} />
       </Tabs.Navigator>
+      <StatusBar style="light" />
     </NavigationContainer>
   );
 }
