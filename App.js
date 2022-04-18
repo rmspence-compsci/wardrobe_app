@@ -44,6 +44,8 @@ const App = () => {
     <NavigationContainer>
       <Tabs.Navigator screenOptions={({ route }) => {
         return {
+          headerTintColor: "white",
+          headerStyle: { backgroundColor: "#16579C", borderBottomWidth: 0 },
           headerShown: false,
           tabBarActiveTintColor: "white",
           tabBarInactiveTintColor: "lightgray",

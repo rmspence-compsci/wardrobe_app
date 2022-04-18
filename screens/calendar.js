@@ -57,8 +57,16 @@ class Calendar extends React.Component{
     button_state: [styles.button_activated, styles.button, styles.button, styles.button, styles.button, styles.button, styles.button],
   }
 
-  render(){
+  constructor({ navigation }) {
+    super();
 
+    navigation.setOptions({
+      headerShown: true,
+      headerTitle: "My Calendar",
+    });
+  }
+
+  render(){
     // sets date selected by user to be a state
     const selected_date = this.state.selected_date;
     const selected_day = this.state.selected_day;
@@ -67,9 +75,9 @@ class Calendar extends React.Component{
     return (
       <View style={styles.container}>
         <View style={styles.header_container}>
-          <View style={styles.title_container}>
+          {/* <View style={styles.title_container}>
             <Text style={styles.title}>My Calendar</Text>
-          </View>
+          </View> */}
           
           {/* display day codes (e.g. M T W T F S ....) */}
           <View style={styles.day_code_container}>
@@ -270,7 +278,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#16579c',
     justifyContent: "space-evenly",
     flexDirection: 'column',
-    paddingVertical: 60,
+    paddingBottom: 60,
+    paddingTop: 20,
   },
   title_container: {
     top: -15,

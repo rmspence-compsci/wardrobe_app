@@ -9,6 +9,11 @@ import WeatherScroll from '../components/WeatherScroll'
 export default class App extends Component {
   constructor(props) {
     super(props);
+  
+    props.navigation.setOptions({
+      headerShown: true,
+      headerTitle: "Weather",
+    });
 
     this.state = {
       data: [],
