@@ -5,6 +5,7 @@ import { ClothingType } from "../recommender";
 import Dialog from "react-native-dialog";
 import AttributeBox from "../components/attributeBox";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ClothingImage from "../components/ClothingImage";
 
 export const nameArray = [];   // Store list of Names of outfit pieces into array
 
@@ -46,6 +47,7 @@ const AddClothes = ({ navigation }) => {
       rain: rain
     }
     storeData(newOutfit);
+    navigation.pop();
   }
 
   const storeData = async (value) => {
@@ -76,20 +78,7 @@ const AddClothes = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       
       {/* Display Image of Clothes here  */}
-      <View style={styles.clothesImageBox}>
-        <Image 
-            style={{
-              width:240,
-              height:240,
-              resizeMode: 'contain',
-            tintColor: colourValue,
-            } 
-            }
-            
-            source={typeImages[clothType]} // Disabled beanie due to screen burn in
-            
-        />
-      </View>
+      <ClothingImage color={colourValue} type={clothType} />
 
       {/* Title */}
       <View style={styles.titleView}>
@@ -107,14 +96,14 @@ const AddClothes = ({ navigation }) => {
 
           <Text style={styles.titleText}>Add Clothes</Text>
 
-          <View style={styles.savedOutfitsButtonWrapper}>
+          {/* <View style={styles.savedOutfitsButtonWrapper}>
             <Button
             title="Saved Outfits"
             style={styles.savedOutfitsButton}
             onPress={onSavedOutfitsPressHandler}
             color={Platform.OS == 'android' ? '#16579c' : 'white' }
             />
-          </View>
+          </View> */}
 
           <View style={styles.picker1Wrapper}>
             <Picker
