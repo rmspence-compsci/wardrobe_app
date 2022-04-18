@@ -50,7 +50,7 @@ const App = () => {
           headerStyle: { backgroundColor: "#16579C", borderBottomWidth: 0 },
           headerShown: false,
           tabBarActiveTintColor: "white",
-          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveTintColor: "rgba(255, 255, 255, .6)",
           tabBarIcon: ({ color, size }) => < Ionicons color={color} name={tabIcons[route.name]} size={size} />,
           tabBarLabel: route.name,
           tabBarStyle: { backgroundColor: "#16579C", borderTopWidth: 0 },
