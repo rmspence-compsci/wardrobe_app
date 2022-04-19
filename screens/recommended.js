@@ -20,6 +20,8 @@ const Recommended = ({ navigation }) => {
   }, [navigation])
 
   const [recommendation, setRecommendation] = useState(undefined);
+  const [icon, setIcon] = useState(undefined);
+  const [temp, setTemp] = useState(undefined);
 
   useEffect(() => {
     AsyncStorage.getAllKeys()
@@ -34,6 +36,13 @@ const Recommended = ({ navigation }) => {
         setRecommendation(outfit);
       });
   }, [])
+
+  fetch("https://api.openweathermap.org/data/2.5/onecall?lat=53.3498&lon=6.2603&exclude=minutely,hourly&appid=50b857753c980b99f5281bf0531b0e98")
+    .then((res) => res.json())
+    .then((weatherData) => {
+      setIcon(`http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`);
+      setTemp(Math.floor(weatherData.current.temp - 273));
+    });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -63,11 +72,13 @@ const Recommended = ({ navigation }) => {
       </View>
       {/* Compenent for the weather preview */}
       <View style={styles.weatherSection}>
-        <Text style={styles.weatherText}> 22 degrees Celcius</Text>
-        <Image
-        source={{uri: 'http://openweathermap.org/img/wn/10d@2x.png'}}
-        style={styles.weatherIcon}
-        />
+        { icon && temp && <>
+          <Text style={styles.weatherText}> {temp} degrees Celcius</Text>
+          <Image
+          source={{uri: icon}}
+          style={styles.weatherIcon}
+          />
+        </>}
       </View>
     </SafeAreaView>
   );
