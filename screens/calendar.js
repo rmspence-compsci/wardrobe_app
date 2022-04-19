@@ -60,10 +60,12 @@ class Calendar extends React.Component{
   constructor({ navigation }) {
     super();
 
-    navigation.setOptions({
-      headerShown: true,
-      headerTitle: "My Calendar",
-    });
+    this.navigation = navigation;
+
+    // navigation.setOptions({
+    //   headerShown: true,
+    //   headerTitle: "My Calendar",
+    // });
   }
 
   render(){
@@ -231,7 +233,7 @@ class Calendar extends React.Component{
           
           {/* add event button */}
           <View style={styles.date_container}>
-            <TouchableOpacity style = {styles.add_event_button}>
+            <TouchableOpacity style = {styles.add_event_button} onPress={() => this.navigation.push("AddEvent")}>
               <View style={styles.add_event_container}>
                 <Text style={styles.add_event_text}>Add Event</Text>
               </View>
@@ -279,7 +281,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     flexDirection: 'column',
     paddingBottom: 60,
-    paddingTop: 20,
+    paddingTop: 160
   },
   title_container: {
     top: -15,
@@ -355,7 +357,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    height: 500,
+    height: 450,
   },
   event_buffer: {
     justifyContent: 'center',

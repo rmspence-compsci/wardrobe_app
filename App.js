@@ -5,7 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 
 // import Navigator from './routes/homeStack';
-import Calendar from "./screens/calendar";
+import CalendarNavigator from "./screens/calendarNavigator";
 import Outfit from "./screens/outfit/outfit";
 import Weather from "./screens/weather";
 
@@ -57,7 +57,7 @@ const App = () => {
         };
       }}>
         <Tabs.Screen name="Outfit" component={Outfit} />
-        <Tabs.Screen name="Calendar" component={Calendar} />
+        <Tabs.Screen name="Calendar" component={CalendarNavigator} />
         <Tabs.Screen name="Weather"  component={Weather} />
       </Tabs.Navigator>
       <StatusBar style="light" />

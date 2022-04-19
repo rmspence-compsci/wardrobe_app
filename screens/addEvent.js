@@ -49,7 +49,7 @@ export default function App({navigation}) {
       <View style = {styles.header}>
         <View style = {styles.header_title}> 
             
-            <Text style = {styles.addEventText}> Add event </Text>
+            {/* <Text style = {styles.addEventText}> Add event </Text> */}
 
         </View>
       </View>
