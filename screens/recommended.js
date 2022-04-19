@@ -2,32 +2,38 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Alert, SafeAreaView, Image, TextComponent } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Recommender } from "../recommender";
+import ClothingImage from '../components/ClothingImage';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
 const Recommended = ({ navigation }) => {
 
 // send a user to the calendar page when they click the calendar button
   // send a user to the add clothes page when they click the add clothes button
-  navigation.setOptions({
-    headerRight() {
-      return <Button title="Add" color="white" onPress={() => navigation.navigate("AddClothes")} />
-    },
-
-    title: "Today's Outfit",
-  });
-
-  let recommendation;
-
-  AsyncStorage.getAllKeys()
-    .then((keys) => {
-      return Promise.all(keys.map((key) => AsyncStorage.getItem(key)));
-    })
-    .then((clothes) => {
-      const recommender = new Recommender(clothes.map((clothesJSON) => JSON.parse(clothesJSON)));
-      
-      console.log(recommender.wardrobe);
-      recommendation = recommender.recommendOutfit({ temperature: -3, willRain: true });
-      console.log(recommendation);
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight() {
+        return <Button title="Add" color="white" onPress={() => navigation.navigate("AddClothes")} />
+      },
+  
+      title: "Today's Outfit",
     });
+  }, [navigation])
+
+  const [recommendation, setRecommendation] = useState(undefined);
+
+  useEffect(() => {
+    AsyncStorage.getAllKeys()
+      .then((keys) => {
+        return Promise.all(keys.map((key) => AsyncStorage.getItem(key)));
+      })
+      .then((clothes) => {
+        const recommender = new Recommender(clothes.map((clothesJSON) => JSON.parse(clothesJSON)));
+        const outfit = recommender.recommendOutfit({ willRain: true })
+        // console.log(recommender.wardrobe);
+        // console.log(outfit);
+        setRecommendation(outfit);
+      });
+  }, [])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,21 +41,25 @@ const Recommended = ({ navigation }) => {
         {/* Title */}
         {/* <Text style={styles.title}>Today's Outfit</Text> */}
         {/* Generic images */}
-        <Image 
+        {/* <Image 
           source={require('../assets/plainshirt.png')}
           style={styles.tshirt} 
           resizeMode='contain'
-        />
-        <Image 
+        /> */}
+        { recommendation && <ClothingImage color={recommendation.torso[0].color} type={recommendation.torso[0].type} size={180} />}
+        {/* { recommendation && <ClothingImage color={recommendation.legs[0].color} type={recommendation.legs[0].type} />} */}
+        {/* <Image 
           source={require('../assets/jeans.png')}
           style={styles.pants} 
           resizeMode='contain'
-        />
-        <Image 
+        /> */}
+        { recommendation && <ClothingImage color={recommendation.legs[0].color} type={recommendation.legs[0].type} size={180} />}
+        { recommendation && <ClothingImage color={recommendation.shoes.color} type={recommendation.shoes.type} size={140} />}
+        {/* <Image 
           source={require('../assets/gumshoes.png')}
           style={styles.shoes} 
           resizeMode='contain'
-        />
+        /> */}
       </View>
       {/* Compenent for the weather preview */}
       <View style={styles.weatherSection}>

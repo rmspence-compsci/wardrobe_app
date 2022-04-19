@@ -118,7 +118,7 @@ export class Recommender {
     outfit.shoes = pickRandomElement(this.wardrobe.filter(filterByPropertyValue("type", ClothingType.Shoes)));
     outfit.legs.push(pickRandomElement(items.filter(filterByPropertyValue("type", ClothingType.UnderGarment))));
 
-    outfit.legs.push(pickRandomElement(items.filter(filterByPropertyValue("type", ClothingType.Pants))));
+    outfit.legs.unshift(pickRandomElement(items.filter(filterByPropertyValue("type", ClothingType.Pants))));
     outfit.torso.push(pickRandomElement(items.filter(filterByPropertyValue("type", ClothingType.Layer))));
 
     return outfit;

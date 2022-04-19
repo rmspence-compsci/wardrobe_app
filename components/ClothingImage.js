@@ -9,12 +9,12 @@ export const clothingImages = {
   [ClothingType.Shoes]: require('../assets/shoes.png')
 }
 
-export default function ClothingImage({ color, type }) {
+export default function ClothingImage({ color, size = 240, type }) {
   return (
     <View style={{ alignItems: "center" }}>
       <Image
         source={clothingImages[type]}
-        style={{ height: 240, width: 240, resizeMode: "contain", tintValue: color }}
+        style={{ height: size, width: size, resizeMode: "contain", tintColor: color }}
       />
     </View>
   );
