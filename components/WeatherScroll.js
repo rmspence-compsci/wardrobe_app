@@ -34,8 +34,7 @@ const WeatherScroll = ({weatherData}) => {
 }
 
 const CurrWeather = ({temp, data}) => {
-
-    const img = {uri: 'http://openweathermap.org/img/wn/10d@2x.png'} // images are bugging out - need to talk with group
+    const img = {uri: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} // images are bugging out - need to talk with group
     return (
         <View style={styles.currentTempcontainer}>
             <Image source={img} style={styles.image}/>
