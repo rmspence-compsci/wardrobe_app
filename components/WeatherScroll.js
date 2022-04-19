@@ -11,7 +11,24 @@ const WeatherScroll = ({weatherData}) => {
     <ScrollView horizontal={true} style={styles.ScrollView}>
         <CurrWeather temp={weatherData && weatherData.length > 0 ? weatherData[0].temp : {}} 
         data={weatherData && weatherData.length > 0 ? weatherData[0] : {}}/>
-        <FutureWeather data = {weatherData}/>
+
+        <CurrWeather temp={weatherData && weatherData.length > 0 ? weatherData[1].temp : {}} 
+        data={weatherData && weatherData.length > 0 ? weatherData[1] : {}}/>
+
+        <CurrWeather temp={weatherData && weatherData.length > 0 ? weatherData[2].temp : {}} 
+        data={weatherData && weatherData.length > 0 ? weatherData[2] : {}}/>
+
+        <CurrWeather temp={weatherData && weatherData.length > 0 ? weatherData[3].temp : {}} 
+        data={weatherData && weatherData.length > 0 ? weatherData[3] : {}}/>
+
+        <CurrWeather temp={weatherData && weatherData.length > 0 ? weatherData[4].temp : {}} 
+        data={weatherData && weatherData.length > 0 ? weatherData[4] : {}}/>
+
+        <CurrWeather temp={weatherData && weatherData.length > 0 ? weatherData[5].temp : {}} 
+        data={weatherData && weatherData.length > 0 ? weatherData[5] : {}}/>
+        
+        <CurrWeather temp={weatherData && weatherData.length > 0 ? weatherData[6].temp : {}} 
+        data={weatherData && weatherData.length > 0 ? weatherData[6] : {}}/>
     </ScrollView>
   )
 }
@@ -36,7 +53,6 @@ const styles = StyleSheet.create({
 
     // eslint-disable-next-line react-native/no-color-literals
     ScrollView: {
-        flex: 0.2,
         backgroundColor: '#16579c',
         padding:35,
         borderRadius: 10,
@@ -54,13 +70,14 @@ const styles = StyleSheet.create({
     },
 
     // eslint-disable-next-line react-native/no-color-literals
-    currentTempcontainer:{
+    currentTempcontainer: {
         flexDirection: 'row',
         backgroundColor: 'white',
         borderRadius: 10,
         padding: 15,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginRight: 10,
 
     },
 
